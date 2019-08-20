@@ -1,0 +1,42 @@
+<MyMDTextFieldRound2@MDTextFieldRound>
+    size_hint_x: None
+    normal_color: color_shadow
+    active_color: color_shadow
+    pos_hint: {'center_x': .5}
+
+<Conversation>:
+    NavigationLayout:
+        id: nav_draw
+        MainNavigationDrawer:
+        GridLayout:
+            rows: 3
+            MDToolbar:
+                id: toolbar
+                title: "Potato's birthday present"
+                md_bg_color: app.theme_cls.primary_color
+                background_palette: 'Primary'
+                background_hue: '500'
+                elevation: 10
+                left_action_items:
+                    [['menu', lambda x: nav_draw.toggle_nav_drawer()]]
+                right_action_items:
+                    [['dots-vertical', lambda x: None]]
+
+            ScrollView:
+                do_scroll_x: False
+                MDList:
+                    id: grid
+
+            BoxLayout:
+                size_hint_y: None
+                height: 40
+                padding: [15, 0, 15, 5]
+                orientation: "vertical"
+
+                MDTextField:
+                    id: txtMessage
+                    hint_text: "Type a message"
+                    multiline: False
+                    disabled: True
+                    on_text_validate: root.send_msg(self.text)
+
